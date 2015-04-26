@@ -83,5 +83,6 @@ rowsGen rowSize offsetEmptyCell reservedCells (curBlock : restBlocks) =
   [(replicate i Empty) ++ blockFilled ++ restRow 
     | i <- [offsetEmptyCell .. rowSize - reservedCells], 
       let remainingRowSize = rowSize - i - curBlock,
-      let remainingReservedCells = reservedCells - curBlock - 1,
-      restRow <- rowsGen remainingRowSize 1 remainingReservedCells restBlocks]
+      let reservedEmpty = 1,
+      let remainingReservedCells = reservedCells - curBlock - reservedEmpty,
+      restRow <- rowsGen remainingRowSize reservedEmpty remainingReservedCells restBlocks]
